@@ -20,6 +20,12 @@ const SideMenu: React.FC<SideMenuType> = ({
   setSearchInput,
 }) => {
   const [logoHover, setLogoHover] = useState(false);
+  const [homeHover, setHomeHover] = useState(false);
+  const [hospitalHover, setHospitalHover] = useState(false);
+  const [patientHover, setPatientlHover] = useState(false);
+  const [reserveHover, setReserveHover] = useState(false);
+  const [alarmHover, setAlarmHover] = useState(false);
+
   // 검색 버튼
   const clickSearchButton = () => console.log(searchInput);
 
@@ -33,45 +39,76 @@ const SideMenu: React.FC<SideMenuType> = ({
       >
         <img className="logo" alt="" />
         <h1>병원관리</h1>
-        <div className="hamburger">
-          <img alt="" src={HamBurgerImg} onClick={() => setOpen(!open)} />
+        <div className="hamburger" onClick={() => setOpen(!open)}>
+          <img alt="" src={HamBurgerImg} />
         </div>
       </Top>
-      <Search active={searchInput !== ""}>
+      <Search active={searchInput !== ""} open={open}>
         <input
-          placeholder="환자 검색"
+          placeholder={open ? "환자 검색" : ""}
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           onClick={clickSearchButton}
+          disabled={!open}
         />
         <img src={HamBurgerImg} alt="" />
       </Search>
-      <MenuLink href="/">
+      <MenuLink
+        href="/"
+        open={open}
+        hover={homeHover}
+        onMouseOver={() => setHomeHover(true)}
+        onMouseOut={() => setHomeHover(false)}
+      >
         <div>
           <img src={HomgImg} alt="" />
-          병원 홈
+          <span>병원 홈</span>
         </div>
       </MenuLink>
-      <MenuLink href="/">
+      <MenuLink
+        href="/"
+        open={open}
+        hover={hospitalHover}
+        onMouseOver={() => setHospitalHover(true)}
+        onMouseOut={() => setHospitalHover(false)}
+      >
         <div>
           <img src={HomgImg} alt="" />
-          병실 관리
+          <span>병실 관리</span>
         </div>
       </MenuLink>
-      <MenuLink href="/">
+      <MenuLink
+        href="/"
+        open={open}
+        hover={patientHover}
+        onMouseOver={() => setPatientlHover(true)}
+        onMouseOut={() => setPatientlHover(false)}
+      >
         <div>
           <img src={HomgImg} alt="" />
-          환우 관리
+          <span>환우 관리</span>
         </div>
       </MenuLink>
-      <MenuLink href="/">
+      <MenuLink
+        href="/"
+        open={open}
+        hover={reserveHover}
+        onMouseOver={() => setReserveHover(true)}
+        onMouseOut={() => setReserveHover(false)}
+      >
         <div>
           <img src={HomgImg} alt="" />
-          예약 관리
+          <span>예약 관리</span>
         </div>
       </MenuLink>
       <Bottom>
-        <MenuLink href="/">
+        <MenuLink
+          href="/"
+          open={open}
+          hover={alarmHover}
+          onMouseOver={() => setAlarmHover(true)}
+          onMouseOut={() => setAlarmHover(false)}
+        >
           <div>
             <img src={HomgImg} alt="" />
             알림
@@ -98,9 +135,9 @@ const Container = styled.section<{ open: boolean }>`
   display: flex;
   flex-direction: column;
   background-color: #2c2c2c;
-  width: ${(props) => (props.open ? "311.5px" : "94px")};
+  width: ${(props) => (props.open ? "311.5px" : "90px")};
   height: 100vh;
-  padding: 40px 17.75px;
+  padding: 40px 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -112,11 +149,13 @@ const Top = styled.div<{ open: boolean; logoHover: boolean }>`
   align-items: center;
   height: 52.5px;
   margin-bottom: 32px;
+  padding: 0 17.75px;
   .logo {
     width: 52.5px;
     height: 52.5px;
     background-color: #bfb2ff;
-    margin-right: 8px;
+    margin-right: ${(props) => (props.open ? "8px" : 0)};
+    cursor: pointer;
   }
   h1 {
     display: ${(props) => !props.open && "none"};
@@ -126,7 +165,8 @@ const Top = styled.div<{ open: boolean; logoHover: boolean }>`
     line-height: 120%;
   }
   .hamburger {
-    display: ${(props) => (!props.open && props.logoHover ? "block" : "none")};
+    display: ${(props) =>
+      props.open || (!props.open && props.logoHover) ? "block" : "none"};
     position: ${(props) => (props.open ? "static" : "absolute")};
     text-align: center;
     margin-left: auto;
@@ -144,11 +184,14 @@ const Top = styled.div<{ open: boolean; logoHover: boolean }>`
   }
 `;
 
-const Search = styled.div<{ active: boolean }>`
+const Search = styled.div<{ active: boolean; open: boolean }>`
   position: relative;
   margin-bottom: 32px;
+  padding: 0 17.75px;
   input {
     width: 100%;
+    padding: ${(props) =>
+      props.open ? "16.75px 52.5px 16.75px 52.5px" : "16px 0px"};
     background: #333333;
     background-image: url("/type_eyear_frontend_hospital/img/search.png");
     background-repeat: no-repeat;
@@ -156,7 +199,6 @@ const Search = styled.div<{ active: boolean }>`
     background-position: 16px center;
     border-radius: 8px;
     border: none;
-    padding: 16.75px 52.5px 16.75px 52.5px;
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
@@ -182,8 +224,9 @@ const Search = styled.div<{ active: boolean }>`
   }
 `;
 
-const MenuLink = styled.a`
+const MenuLink = styled.a<{ open: boolean; hover: boolean }>`
   text-decoration: none;
+  padding: 0 17.75px;
   div {
     display: flex;
     font-style: normal;
@@ -217,9 +260,20 @@ const MenuLink = styled.a`
     line-height: 120%;
     color: #2c2c2c;
   }
+  span {
+    background-color: ${(props) => (props.open ? "rgb(0,0,0,0)" : "#1e1e1e")};
+    position: ${(props) => (props.open ? "static" : "absolute")};
+    white-space: nowrap;
+    left: 80px;
+    padding: ${(props) => !props.open && "16px"};
+    border-radius: 4px;
+    display: ${(props) =>
+      props.open || (!props.open && props.hover) ? "block" : "none"};
+  }
 `;
 
 const Bottom = styled.div`
+  padding: 0 17.75px;
   margin-top: auto;
 `;
 
