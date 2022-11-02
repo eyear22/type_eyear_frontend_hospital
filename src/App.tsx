@@ -1,13 +1,17 @@
 import { GlobalStyles } from "./style/GlobalStyles";
 import SideMenu from "./components/common/SideMenu";
-import { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 
+const Layout = () => (
+  <div>
+    <SideMenu />
+    <Outlet />
+  </div>
+);
+
 function App() {
-  const [open, setOpen] = useState(true);
-  const [searchInput, setSearchInput] = useState("");
   const user = true;
   return (
     <>
@@ -17,16 +21,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <>
             {user && (
-              <Route
-                element={
-                  <SideMenu
-                    open={open}
-                    setOpen={setOpen}
-                    searchInput={searchInput}
-                    setSearchInput={setSearchInput}
-                  />
-                }
-              >
+              <Route element={<Layout />}>
                 <Route path="/" element={<HomePage />} />
               </Route>
             )}

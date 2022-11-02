@@ -10,8 +10,8 @@ export const GlobalStyles = createGlobalStyle`
   }
   body {
     display: flex;
-    background:#333333;
-    color: #FFFFFF;
+    background:#F8F8F8;
+    color: #000000;
     font-family: Inter;
     height: 100vh;
     text-rendering: optimizeLegibility;
