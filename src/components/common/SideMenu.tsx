@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-const SettingImg = process.env.PUBLIC_URL + "/img/Settings.png";
-
 const SideMenu = () => {
   return (
     <Container>
@@ -10,26 +8,22 @@ const SideMenu = () => {
         <MenuWrap>
           <h1>메뉴</h1>
           <MenuLink href={process.env.PUBLIC_URL + "/"}>
-            <div>
-              <img src={SettingImg} alt="" />
+            <div className="Home">
               <span>병원 홈</span>
             </div>
           </MenuLink>
           <MenuLink href={process.env.PUBLIC_URL + "/"}>
-            <div>
-              <img src={SettingImg} alt="" />
+            <div className="Clipboard">
               <span>병실 관리</span>
             </div>
           </MenuLink>
           <MenuLink href={process.env.PUBLIC_URL + "/"}>
-            <div>
-              <img src={SettingImg} alt="" />
+            <div className="User_Empty">
               <span>환우 관리</span>
             </div>
           </MenuLink>
           <MenuLink href={process.env.PUBLIC_URL + "/"}>
-            <div>
-              <img src={SettingImg} alt="" />
+            <div className="Calendar_Days">
               <span>예약 관리</span>
             </div>
           </MenuLink>
@@ -37,14 +31,12 @@ const SideMenu = () => {
         <MenuWrap>
           <h1 className="manage">계정 관리</h1>
           <MenuLink href={process.env.PUBLIC_URL + "/"}>
-            <div>
-              <img src={SettingImg} alt="" />
+            <div className="Settings">
               <span>병원 계정 수정</span>
             </div>
           </MenuLink>
         </MenuWrap>
       </Top>
-
       <Bottom>
         <p>아이어로 간편한 비대면 면회 관리</p>
         <span>ver.1</span>
@@ -104,6 +96,36 @@ const MenuWrap = styled.div`
 
 const MenuLink = styled.a`
   text-decoration: none;
+  .Home {
+    background-image: url("/type_eyear_frontend_hospital/img/Home.png");
+    &:hover {
+      background-image: url("/type_eyear_frontend_hospital/img/Home_b.png");
+    }
+  }
+  .Clipboard {
+    background-image: url("/type_eyear_frontend_hospital/img/Clipboard.png");
+    &:hover {
+      background-image: url("/type_eyear_frontend_hospital/img/Clipboard_b.png");
+    }
+  }
+  .User_Empty {
+    background-image: url("/type_eyear_frontend_hospital/img/User_Empty.png");
+    &:hover {
+      background-image: url("/type_eyear_frontend_hospital/img/User_Empty_b.png");
+    }
+  }
+  .Calendar_Days {
+    background-image: url("/type_eyear_frontend_hospital/img/Calendar_Days.png");
+    &:hover {
+      background-image: url("/type_eyear_frontend_hospital/img/Calendar_Days_b.png");
+    }
+  }
+  .Settings {
+    background-image: url("/type_eyear_frontend_hospital/img/Settings.png");
+    &:hover {
+      background-image: url("/type_eyear_frontend_hospital/img/Settings_b.png");
+    }
+  }
   div {
     display: flex;
     font-family: "Pretendard";
@@ -117,20 +139,22 @@ const MenuLink = styled.a`
     padding: 14px 16px;
     border-radius: 8px;
     border: none;
+
+    background-repeat: no-repeat;
+    background-size: 24px;
+    background-position: 16px center;
     &:hover {
       background: rgba(0, 72, 255, 0.1);
+      background-repeat: no-repeat;
+      background-size: 24px;
+      background-position: 16px center;
       color: #0049fb;
     }
   }
-  img {
-    width: 20.5px;
-    height: 20.5px;
-    margin-right: 16px;
-  }
   span {
     white-space: nowrap;
-    left: 80px;
     border-radius: 4px;
+    margin-left: 40px;
   }
 `;
 
