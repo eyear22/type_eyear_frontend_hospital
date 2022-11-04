@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import HomeCalendar from "./HomeCalendar";
 
 const Home = () => {
   return (
@@ -7,7 +8,7 @@ const Home = () => {
         <Wrap>
           <Title>병원 홈</Title>
           <Line />
-          Home
+          <HomeCalendar />
         </Wrap>
       </Container>
     </>
