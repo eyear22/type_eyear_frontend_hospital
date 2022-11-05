@@ -1,16 +1,13 @@
 {
   "files": {
-    "main.css": "/type_eyear_frontend_hospital/static/css/main.073c9b0a.css",
-    "main.js": "/type_eyear_frontend_hospital/static/js/main.f07b05ed.js",
-    "static/js/787.e47b0e9e.chunk.js": "/type_eyear_frontend_hospital/static/js/787.e47b0e9e.chunk.js",
-    "static/media/logo.svg": "/type_eyear_frontend_hospital/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "main.css": "/type_eyear_frontend_hospital/static/css/main.3cbeb2fd.css",
+    "main.js": "/type_eyear_frontend_hospital/static/js/main.b46fc9d6.js",
     "index.html": "/type_eyear_frontend_hospital/index.html",
-    "main.073c9b0a.css.map": "/type_eyear_frontend_hospital/static/css/main.073c9b0a.css.map",
-    "main.f07b05ed.js.map": "/type_eyear_frontend_hospital/static/js/main.f07b05ed.js.map",
-    "787.e47b0e9e.chunk.js.map": "/type_eyear_frontend_hospital/static/js/787.e47b0e9e.chunk.js.map"
+    "main.3cbeb2fd.css.map": "/type_eyear_frontend_hospital/static/css/main.3cbeb2fd.css.map",
+    "main.b46fc9d6.js.map": "/type_eyear_frontend_hospital/static/js/main.b46fc9d6.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.f07b05ed.js"
+    "static/css/main.3cbeb2fd.css",
+    "static/js/main.b46fc9d6.js"
   ]
 }
