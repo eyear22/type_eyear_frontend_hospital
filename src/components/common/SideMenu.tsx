@@ -12,17 +12,17 @@ const SideMenu = () => {
               <span>병원 홈</span>
             </div>
           </MenuLink>
-          <MenuLink href={process.env.PUBLIC_URL + "/"}>
+          <MenuLink href={process.env.PUBLIC_URL + "/room"}>
             <div className="Clipboard">
               <span>병실 관리</span>
             </div>
           </MenuLink>
-          <MenuLink href={process.env.PUBLIC_URL + "/"}>
+          <MenuLink href={process.env.PUBLIC_URL + "/patient"}>
             <div className="User_Empty">
               <span>환우 관리</span>
             </div>
           </MenuLink>
-          <MenuLink href={process.env.PUBLIC_URL + "/"}>
+          <MenuLink href={process.env.PUBLIC_URL + "/reservation"}>
             <div className="Calendar_Days">
               <span>예약 관리</span>
             </div>
@@ -30,7 +30,7 @@ const SideMenu = () => {
         </MenuWrap>
         <MenuWrap>
           <h1 className="manage">계정 관리</h1>
-          <MenuLink href={process.env.PUBLIC_URL + "/"}>
+          <MenuLink href={process.env.PUBLIC_URL + "/manage"}>
             <div className="Settings">
               <span>병원 계정 수정</span>
             </div>

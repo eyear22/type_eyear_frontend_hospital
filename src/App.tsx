@@ -3,6 +3,9 @@ import SideMenu from "./components/common/SideMenu";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
+import PatientPage from "./pages/PatientPage";
+import RoomPage from "./pages/RoomPage";
+import ManagePage from "./pages/ManagePage";
 
 const Layout = () => (
   <div>
@@ -23,6 +26,10 @@ function App() {
             {user && (
               <Route element={<Layout />}>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/room" element={<RoomPage />} />
+                <Route path="/patient" element={<PatientPage />} />
+                <Route path="/reservation" element={<PatientPage />} />
+                <Route path="/manage" element={<ManagePage />} />
               </Route>
             )}
           </>

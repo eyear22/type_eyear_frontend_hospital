@@ -19,7 +19,6 @@ const HomeCalendar = () => {
 
 const Wrap = styled.section`
   width: 285.65px;
-  height: 322px;
   background-color: #ffffff;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
   border-radius: 16px;
@@ -30,11 +29,7 @@ const StyledCalendar = styled(Calendar)`
   height: 100%;
   border: 0;
   border-radius: 16px;
-  padding: 18px;
-  .react-calendar__navigation {
-    height: 26px;
-    margin-bottom: 0.5em;
-  }
+  padding: 24px 18px;
   .react-calendar__navigation__prev2-button {
     display: none;
   }
