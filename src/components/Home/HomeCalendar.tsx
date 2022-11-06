@@ -3,6 +3,14 @@ import { Calendar } from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
 
+const marks = [
+  "07-11-2022",
+  "08-11-2022",
+  "11-11-2022",
+  "21-11-2022",
+  "26-11-2022",
+];
+
 const HomeCalendar = () => {
   return (
     <>
@@ -11,6 +19,11 @@ const HomeCalendar = () => {
           locale="en-GB"
           formatDay={(locale, date) => moment(date).format("D")}
           showNeighboringMonth={false}
+          tileClassName={({ date, view }) => {
+            if (marks.find((x) => x === moment(date).format("DD-MM-YYYY"))) {
+              return "highlight";
+            } else return "";
+          }}
         />
       </Wrap>
     </>
@@ -36,6 +49,17 @@ const StyledCalendar = styled(Calendar)`
   .react-calendar__navigation__next2-button {
     display: none;
   }
+  .react-calendar__navigation__label {
+    pointer-events: none;
+  }
+  .react-calendar__navigation__label > span {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #0f2552;
+  }
   .react-calendar__tile {
     color: #1b59f8;
     font-family: "Inter";
@@ -56,6 +80,17 @@ const StyledCalendar = styled(Calendar)`
       color: #7e818c;
       text-decoration: none;
     }
+  }
+  .react-calendar__tile--now {
+    background: #ffffff;
+  }
+  .react-calendar__tile--now:enabled:hover,
+  .react-calendar__tile--now:enabled:focus {
+    background: #ffffff;
+  }
+  .highlight {
+    background: #c8dbff;
+    border-radius: 40px;
   }
 `;
 
