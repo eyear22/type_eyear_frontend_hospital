@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import RoomAddBtn from "./RoomAddBtn";
+import RoomList from "./RoomList";
 
 const Room = () => {
   return (
@@ -7,6 +9,8 @@ const Room = () => {
         <Wrap>
           <Title>병실 관리</Title>
           <Line />
+          <RoomList />
+          <RoomAddBtn />
         </Wrap>
       </Container>
     </>

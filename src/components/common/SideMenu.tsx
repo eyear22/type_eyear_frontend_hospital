@@ -1,9 +1,12 @@
 import styled from "styled-components";
+const LogoIcon = process.env.PUBLIC_URL + "/img/logo.png";
 
 const SideMenu = () => {
   return (
     <Container>
-      <Logo />
+      <Logo>
+        <img src={LogoIcon} alt="" />
+      </Logo>
       <Top>
         <MenuWrap>
           <h1>메뉴</h1>
@@ -59,9 +62,13 @@ const Container = styled.section`
 `;
 
 const Logo = styled.div`
-  background-color: #d9d9d9;
-  height: 60px;
-  margin: 0 8px 16px 8px;
+  display: flex;
+  justify-content: center;
+  margin: 0 8px 50px 8px;
+  img {
+    width: 80%;
+    height: 30x;
+  }
 `;
 
 const Top = styled.div`

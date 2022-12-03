@@ -1,8 +1,25 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { LoginAPI } from "../../redux/auth";
+import { setCookie } from "../../util/cookie";
 
 const CloseImg = process.env.PUBLIC_URL + "/img/login_close.png";
 
 const Login = () => {
+  const [id, setId] = useState("test_id2");
+  const [password, setPassword] = useState("test_password2");
+
+  const auth = useSelector((state: any) => state.auth.data);
+
+  const dispatch = useDispatch<any>();
+  const LoginBtn = () => {
+    dispatch(LoginAPI(id, password));
+    if (auth.message === "success") {
+      setCookie("access_token", auth.tokens.access_token);
+      setCookie("refresh_token", auth.tokens.refresh_token);
+    }
+  };
   return (
     <>
       <Container>
@@ -14,20 +31,26 @@ const Login = () => {
             <input
               placeholder="병원 고유 번호를 입력해주세요."
               className="unique"
+              value={id}
+              onChange={(e) => setId(e.target.value)}
             />
-            <div className="warning">
+            {/* <div className="warning">
               <img src={CloseImg} alt="" />
               등록된 고유번호가 아닙니다.
-            </div>
-            <input placeholder="병원 비밀번호를 입력해주세요." />
-            <div className="warning">
+            </div> */}
+            <input
+              placeholder="병원 비밀번호를 입력해주세요."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {/* <div className="warning">
               <img src={CloseImg} alt="" />
               올바른 비밀번호가 아닙니다.
-            </div>
+            </div> */}
             <FindPwd>
               <h4>비밀번호 찾기</h4>
             </FindPwd>
-            <button>로그인</button>
+            <button onClick={LoginBtn}>로그인</button>
             <Signup>
               <h4>아이어가 처음이산가요? 계정 등록하기</h4>
             </Signup>

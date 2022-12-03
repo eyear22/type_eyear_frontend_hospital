@@ -1,45 +1,70 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-// import HomeCalendar from "./HomeCalendar";
+import { GetTodayMail } from "../../redux/hospital";
+import MailDetailModal from "../MailDetail/MailDetailModal";
+import HomeCalendar from "./HomeCalendar";
+const PlusIcon = process.env.PUBLIC_URL + "/img/Home_plus.png";
+const MinusIcon = process.env.PUBLIC_URL + "/img/Home_minus.png";
 
 // 환자번호, 병동, 병실, 환지이름
 const Home = () => {
+  const [open, setOpen] = useState(false);
+  const [postOpen, setPostOpen] = useState(false);
+
+  const dispatch = useDispatch<any>();
+  useEffect(() => {
+    dispatch(GetTodayMail());
+  }, []);
+  const mailList = useSelector((state: any) => state.hospital.data);
+  console.log(mailList);
   return (
     <>
       <Container>
         <Wrap>
           <Title>병원 홈</Title>
           <Line />
-          <Box>
+          <HomeCalendar />
+          <Box open={postOpen}>
             <h4>
-              오늘의 영상우편<span>5</span>
+              오늘의 영상우편
+              <span>{mailList && mailList.today_posts.length}</span>
             </h4>
-            <button>+</button>
+            <button onClick={() => setPostOpen(!postOpen)}>
+              <img src={postOpen ? MinusIcon : PlusIcon} alt="" />
+            </button>
           </Box>
-          <UnderBox>
-            <div className="item">
-              <div className="num">001</div>
-              <div className="name">박세희</div>
-              <div className="hos">21병동/202호</div>
-            </div>
-            <div className="item">
-              <div className="num">002</div>
-              <div className="name">박세희</div>
-              <div className="hos">21병동/202호</div>
-            </div>
-          </UnderBox>
-          <Box>
+          {postOpen && (
+            <UnderBox>
+              <div className="item" onClick={() => setOpen(true)}>
+                <div className="num">001</div>
+                <div className="name">박세희</div>
+                <div className="hos">21병동/202호</div>
+              </div>
+              <div className="item" onClick={() => setOpen(true)}>
+                <div className="num">002</div>
+                <div className="name">박세희</div>
+                <div className="hos">21병동/202호</div>
+              </div>
+            </UnderBox>
+          )}
+
+          <Box open={postOpen}>
             <h4>
               오늘의 비대면 면회<span>0</span>
             </h4>
-            <button>+</button>
+            <button>
+              <img src={PlusIcon} alt="" />
+            </button>
           </Box>
-          <Box>
+          <Box open={postOpen}>
             <h4>
               오늘의 영상통화<span>0</span>
             </h4>
             <button>-</button>
           </Box>
         </Wrap>
+        {open && <MailDetailModal open={open} setOpen={setOpen} />}
       </Container>
     </>
   );
@@ -75,7 +100,7 @@ const Line = styled.div`
   margin-bottom: 32px;
 `;
 
-const Box = styled.div`
+const Box = styled.div<{ open: boolean }>`
   display: flex;
   align-items: center;
   padding: 20px 24px;
@@ -103,16 +128,20 @@ const Box = styled.div`
     color: rgba(47, 47, 47, 0.4);
   }
   button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-left: auto;
     background: #e5edff;
     height: 36px;
     width: 36px;
     border-radius: 100px;
     border: none;
-    text-align: center;
     cursor: pointer;
-    color: #0029ff;
-    font-size: 22px;
+    background-color: ${(props) => (props.open ? "#EFF0F6" : "#E5EDFF")};
+    img {
+      width: 12px;
+    }
   }
 `;
 
@@ -126,7 +155,6 @@ const UnderBox = styled.div`
   background: #ffffff;
   border: 1px solid #eff0f6;
   border-radius: 20px;
-  cursor: pointer;
   .item {
     display: flex;
     width: 100%;
@@ -134,6 +162,7 @@ const UnderBox = styled.div`
     padding: 16px;
     border-radius: 10px;
     white-space: pre;
+    cursor: pointer;
     .num {
       width: 10%;
       font-weight: 600;

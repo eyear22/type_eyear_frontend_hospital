@@ -6,6 +6,21 @@ import HomePage from "./pages/HomePage";
 import PatientPage from "./pages/PatientPage";
 import RoomPage from "./pages/RoomPage";
 import ManagePage from "./pages/ManagePage";
+import ReservationPage from "./pages/ReservationPage";
+import { applyMiddleware, createStore } from "redux";
+import rootReducer from "./redux/rootReducer";
+import { composeWithDevTools } from "redux-devtools-extension";
+import ReduxThunk from "redux-thunk";
+import logger from "redux-logger";
+import persistStore from "redux-persist/es/persistStore";
+import { PersistGate } from "redux-persist/integration/react";
+import { Provider } from "react-redux";
+
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(ReduxThunk.withExtraArgument({}), logger))
+);
+const persistor = persistStore(store);
 
 const Layout = () => (
   <div>
@@ -20,20 +35,24 @@ function App() {
     <>
       <GlobalStyles />
       <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <>
-            {user && (
-              <Route element={<Layout />}>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/room" element={<RoomPage />} />
-                <Route path="/patient" element={<PatientPage />} />
-                <Route path="/reservation" element={<PatientPage />} />
-                <Route path="/manage" element={<ManagePage />} />
-              </Route>
-            )}
-          </>
-        </Routes>
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <Routes>
+              <Route path="/login" element={<LoginPage />} />
+              <>
+                {user && (
+                  <Route element={<Layout />}>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/room" element={<RoomPage />} />
+                    <Route path="/patient" element={<PatientPage />} />
+                    <Route path="/reservation" element={<ReservationPage />} />
+                    <Route path="/manage" element={<ManagePage />} />
+                  </Route>
+                )}
+              </>
+            </Routes>
+          </PersistGate>
+        </Provider>
       </BrowserRouter>
     </>
   );
