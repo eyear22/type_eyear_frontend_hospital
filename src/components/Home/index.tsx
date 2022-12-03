@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import HomeCalendar from "./HomeCalendar";
+// import HomeCalendar from "./HomeCalendar";
 
+// 환자번호, 병동, 병실, 환지이름
 const Home = () => {
   return (
     <>
@@ -8,18 +9,28 @@ const Home = () => {
         <Wrap>
           <Title>병원 홈</Title>
           <Line />
-          <HomeCalendar />
           <Box>
             <h4>
               오늘의 영상우편<span>5</span>
             </h4>
             <button>+</button>
           </Box>
+          <UnderBox>
+            <div className="item">
+              <div className="num">001</div>
+              <div className="name">박세희</div>
+              <div className="hos">21병동/202호</div>
+            </div>
+            <div className="item">
+              <div className="num">002</div>
+              <div className="name">박세희</div>
+              <div className="hos">21병동/202호</div>
+            </div>
+          </UnderBox>
           <Box>
             <h4>
-              오늘의 비대면 면회<span>3</span>
+              오늘의 비대면 면회<span>0</span>
             </h4>
-
             <button>+</button>
           </Box>
           <Box>
@@ -102,6 +113,56 @@ const Box = styled.div`
     cursor: pointer;
     color: #0029ff;
     font-size: 22px;
+  }
+`;
+
+const UnderBox = styled.div`
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 95px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #eff0f6;
+  border-radius: 20px;
+  cursor: pointer;
+  .item {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    padding: 16px;
+    border-radius: 10px;
+    white-space: pre;
+    .num {
+      width: 10%;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 120%;
+      color: #000000;
+    }
+    .name {
+      width: 70%;
+      font-family: "Pretendard";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 120%;
+      color: #000000;
+    }
+    .hos {
+      width: 20%;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      letter-spacing: -0.154px;
+      color: #70768c;
+    }
+    &:hover {
+      background-color: #eff0f6;
+    }
   }
 `;
 
