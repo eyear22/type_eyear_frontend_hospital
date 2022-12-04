@@ -1,25 +1,33 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { LoginAPI } from "../../redux/auth";
 import { setCookie } from "../../util/cookie";
 
-const CloseImg = process.env.PUBLIC_URL + "/img/login_close.png";
-
 const Login = () => {
-  const [id, setId] = useState("test_id2");
-  const [password, setPassword] = useState("test_password2");
+  const navigate = useNavigate();
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
 
   const auth = useSelector((state: any) => state.auth.data);
-
+  console.log(auth);
   const dispatch = useDispatch<any>();
+
   const LoginBtn = () => {
     dispatch(LoginAPI(id, password));
+
     if (auth.message === "success") {
       setCookie("access_token", auth.tokens.access_token);
       setCookie("refresh_token", auth.tokens.refresh_token);
+      goHome();
     }
   };
+
+  const goHome = () => {
+    navigate("/");
+  };
+
   return (
     <>
       <Container>
@@ -42,6 +50,7 @@ const Login = () => {
               placeholder="병원 비밀번호를 입력해주세요."
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              type="password"
             />
             {/* <div className="warning">
               <img src={CloseImg} alt="" />

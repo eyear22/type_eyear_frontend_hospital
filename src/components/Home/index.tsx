@@ -11,6 +11,8 @@ const MinusIcon = process.env.PUBLIC_URL + "/img/Home_minus.png";
 const Home = () => {
   const [open, setOpen] = useState(false);
   const [postOpen, setPostOpen] = useState(false);
+  const [meetOpen, setMeetOpen] = useState(false);
+  const [callOpen, setCallOpen] = useState(false);
 
   const dispatch = useDispatch<any>();
   useEffect(() => {
@@ -52,19 +54,21 @@ const Home = () => {
                 ))}
             </UnderBox>
           )}
-          <Box open={postOpen}>
+          <Box open={meetOpen}>
             <h4>
               오늘의 비대면 면회<span>0</span>
             </h4>
-            <button>
-              <img src={PlusIcon} alt="" />
+            <button onClick={() => setMeetOpen(!meetOpen)}>
+              <img src={meetOpen ? MinusIcon : PlusIcon} alt="" />
             </button>
           </Box>
-          <Box open={postOpen}>
+          <Box open={callOpen}>
             <h4>
               오늘의 영상통화<span>0</span>
             </h4>
-            <button>-</button>
+            <button onClick={() => setCallOpen(!callOpen)}>
+              <img src={callOpen ? MinusIcon : PlusIcon} alt="" />
+            </button>
           </Box>
         </Wrap>
         {open && <MailDetailModal open={open} setOpen={setOpen} />}

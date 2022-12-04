@@ -6,9 +6,9 @@ import styled from "styled-components";
 const marks = [
   "07-11-2022",
   "08-11-2022",
-  "11-11-2022",
-  "21-11-2022",
-  "26-11-2022",
+  "02-12-2022",
+  "20-12-2022",
+  "22-12-2022",
 ];
 
 const HomeCalendar = () => {
