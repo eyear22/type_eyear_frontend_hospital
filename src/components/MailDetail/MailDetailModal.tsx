@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import StyledModal from "../common/StyledModal";
 
@@ -7,28 +8,29 @@ type DetailModalType = {
   setOpen: (v: boolean) => void;
 };
 
+axios.defaults.baseURL = "http://localhost:3000"; //서버주소
+axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
+axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+
 const MailDetailModal: React.FC<DetailModalType> = ({ open, setOpen }) => {
+  const [text, setText] = useState("");
+  useEffect(() => {
+    axios.get("/swu-eyear/1669650131968.txt").then((res) => {
+      console.log(res.data);
+      setText(res.data);
+    });
+  }, []);
+
   return (
     <StyledModal open={open} setOpen={setOpen}>
       <Video controls>
-        <source type="video/mp4" />
+        <source
+          src={"https://storage.googleapis.com/swu-eyear/1669650131968.mp4"}
+          type="video/mp4"
+        />
         {/* <track kind="subtitles" src={VTT} srcLang="ko" label="Korean" /> */}
       </Video>
-      <TextArea>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sapien
-        elementum ac posuere turpis fringilla. Leo lacus fermentum interdum arcu
-        in integer fermentum, arcu. Magna quis sapien nulla facilisis fermentum
-        sit metus fringilla consequat. Faucibus nascetur in at risus. Lorem
-        ipsum dolor sit amet, consectetur adipiscing elit. Sapien elementum ac
-        posuere turpis fringilla. Leo lacus fermentum ifringilla consequat.
-        Faucibus nascetur in at risus. Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit. Sapien elementum ac posuere turpis fringilla. Leo lacus
-        fermentum ifringilla consequat. Faucibus nascetur in at risus. Lorem
-        ipsum dolor sit amet, consectetur adipiscing elit. Sapien elementum ac
-        posuere turpis fringilla. Leo lacus fermentum interdum arcu in integer
-        fermentum, arcetus fringillaum sit metus fringilla consequaerdum arcu in
-        integer fermentum, arcu.
-      </TextArea>
+      <TextArea>{text}</TextArea>
     </StyledModal>
   );
 };

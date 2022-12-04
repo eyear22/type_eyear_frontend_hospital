@@ -36,19 +36,22 @@ const Home = () => {
           </Box>
           {postOpen && (
             <UnderBox>
-              <div className="item" onClick={() => setOpen(true)}>
-                <div className="num">001</div>
-                <div className="name">박세희</div>
-                <div className="hos">21병동/202호</div>
-              </div>
-              <div className="item" onClick={() => setOpen(true)}>
-                <div className="num">002</div>
-                <div className="name">박세희</div>
-                <div className="hos">21병동/202호</div>
-              </div>
+              {mailList &&
+                mailList.today_posts.map((item: any, index: number) => (
+                  <div
+                    className="item"
+                    onClick={() => setOpen(true)}
+                    key={index}
+                  >
+                    <div className="num">{item.patient_number}</div>
+                    <div className="name">{item.patient_name}</div>
+                    <div className="hos">
+                      {item.patient_ward + "/" + item.patient_roomNumber + "호"}
+                    </div>
+                  </div>
+                ))}
             </UnderBox>
           )}
-
           <Box open={postOpen}>
             <h4>
               오늘의 비대면 면회<span>0</span>
