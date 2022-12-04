@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import PatientList from "./PatientList";
 
 const Patient = () => {
   return (
@@ -7,6 +8,7 @@ const Patient = () => {
         <Wrap>
           <Title>환우 관리</Title>
           <Line />
+          <PatientList />
         </Wrap>
       </Container>
     </>
