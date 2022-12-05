@@ -16,7 +16,6 @@ const MailDetailModal: React.FC<DetailModalType> = ({ open, setOpen }) => {
   const [text, setText] = useState("");
   useEffect(() => {
     axios.get("/swu-eyear/1669650131968.txt").then((res) => {
-      console.log(res.data);
       setText(res.data);
     });
   }, []);
@@ -28,7 +27,12 @@ const MailDetailModal: React.FC<DetailModalType> = ({ open, setOpen }) => {
           src={"https://storage.googleapis.com/swu-eyear/1669650131968.mp4"}
           type="video/mp4"
         />
-        {/* <track kind="subtitles" src={VTT} srcLang="ko" label="Korean" /> */}
+        <track
+          kind="subtitles"
+          src={require("./Test.vtt")}
+          srcLang="ko"
+          label="Korean"
+        />
       </Video>
       <TextArea>{text}</TextArea>
     </StyledModal>
