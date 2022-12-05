@@ -24,7 +24,7 @@ const MailDetailModal: React.FC<DetailModalType> = ({ open, setOpen }) => {
     <StyledModal open={open} setOpen={setOpen}>
       <Video controls>
         <source
-          src={"https://storage.googleapis.com/swu-eyear/1669650131968.mp4"}
+          src={"https://storage.googleapis.com/swu-eyear/1670248028905.mp4"}
           type="video/mp4"
         />
         <track
