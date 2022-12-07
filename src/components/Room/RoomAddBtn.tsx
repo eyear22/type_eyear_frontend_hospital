@@ -5,6 +5,10 @@ const RoomAddBtn = () => {
   return (
     <Container>
       <Button>
+        병동등록
+        <img src={PlusIcon} alt="" />
+      </Button>
+      <Button>
         병실등록
         <img src={PlusIcon} alt="" />
       </Button>
@@ -34,10 +38,14 @@ const Button = styled.button`
   color: #ffffff;
   border: none;
   cursor: pointer;
+  margin-right: 20px;
   img {
     width: 24px;
     height: 24px;
     margin-left: 4px;
+  }
+  &:last-child {
+    margin-right: 0px;
   }
 `;
 
