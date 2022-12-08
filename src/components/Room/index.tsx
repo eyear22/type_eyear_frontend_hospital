@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
-import AddModal from "../common/AddModal";
+import DongAddModal from "./DongAddModal";
 import RoomAddBtn from "./RoomAddBtn";
 import RoomList from "./RoomList";
 
 const Room = () => {
-  const [open, setOpen] = useState(false);
+  const [dongOpen, setDongOpen] = useState(false);
   return (
     <>
       <Container>
@@ -15,9 +15,7 @@ const Room = () => {
           <RoomList />
           <RoomAddBtn />
         </Wrap>
-        <AddModal title="병동추가" open={open} setOpen={setOpen}>
-          ss
-        </AddModal>
+        {<DongAddModal open={dongOpen} setOpen={setDongOpen} />}
       </Container>
     </>
   );

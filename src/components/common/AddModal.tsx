@@ -19,6 +19,7 @@ const AddModal: React.FC<ModalType> = ({ title, open, setOpen, children }) => {
           <h1>{title}</h1>
         </Top>
         <CloseButton src={CloseIcon} alt="" onClick={close} />
+        <Line />
         <Content>{children}</Content>
       </Wrap>
     </Container>
@@ -40,7 +41,7 @@ const Container = styled.div`
 
 const Wrap = styled.div`
   position: absolute;
-  width: 1128px;
+  width: 440px;
   height: 686px;
   text-align: center;
   background-color: rgb(255, 255, 255);
@@ -49,37 +50,42 @@ const Wrap = styled.div`
 
 const Top = styled.div`
   display: flex;
-  background: #f7f7f8;
-  height: 124px;
-  border-radius: 21px 21px 0px 0px;
+  margin: 28px 28px 0 28px;
   h1 {
-    margin-left: 48px;
-    margin-top: 67px;
     font-family: "Pretendard";
     font-style: normal;
     font-weight: 700;
-    font-size: 20.2252px;
-    line-height: 24px;
-    color: #000000;
+    font-size: 18px;
+    line-height: 120%;
+    color: #2f2f2f;
   }
 `;
 
 const CloseButton = styled.img`
   position: absolute;
-  width: 24px;
-  height: 24px;
-  top: 55px;
-  right: 45px;
+  width: 20px;
+  height: 20px;
+  top: 27px;
+  right: 26px;
   border: none;
   color: rgba(0, 0, 0, 0.7);
   background-color: transparent;
   cursor: pointer;
 `;
 
+const Line = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  height: 2px;
+  background: #f4f5f7;
+  margin: 12px 26px 0 26px;
+`;
+
 const Content = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 56px;
+  background-color: aliceblue;
+  margin: 26px;
 `;
 
 export default AddModal;
