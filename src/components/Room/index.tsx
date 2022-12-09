@@ -3,9 +3,12 @@ import styled from "styled-components";
 import DongAddModal from "./DongAddModal";
 import RoomAddBtn from "./RoomAddBtn";
 import RoomList from "./RoomList";
+import SilAddModal from "./SilAddModal";
 
 const Room = () => {
   const [dongOpen, setDongOpen] = useState(false);
+  const [silOpen, setSilOpen] = useState(false);
+
   return (
     <>
       <Container>
@@ -13,9 +16,10 @@ const Room = () => {
           <Title>병실 관리</Title>
           <Line />
           <RoomList />
-          <RoomAddBtn />
+          <RoomAddBtn setDongOpen={setDongOpen} setSilOpen={setSilOpen} />
         </Wrap>
-        {<DongAddModal open={dongOpen} setOpen={setDongOpen} />}
+        {dongOpen && <DongAddModal open={dongOpen} setOpen={setDongOpen} />}
+        {silOpen && <SilAddModal open={silOpen} setOpen={setSilOpen} />}
       </Container>
     </>
   );

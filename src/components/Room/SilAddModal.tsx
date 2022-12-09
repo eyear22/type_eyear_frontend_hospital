@@ -1,18 +1,27 @@
 import styled from "styled-components";
 import AddModal from "../common/AddModal";
 
-type DongAddModalType = {
+type SilAddModalType = {
   open: boolean;
   setOpen: (v: boolean) => void;
 };
 
-const DongAddModal: React.FC<DongAddModalType> = ({ open, setOpen }) => {
+const SilAddModal: React.FC<SilAddModalType> = ({ open, setOpen }) => {
   return (
     <>
-      <AddModal title="병동추가" open={open} setOpen={setOpen}>
+      <AddModal title="병실추가" open={open} setOpen={setOpen}>
         <Wrap>
           <Title>병동 이름을 입력해주세요.</Title>
           <Input placeholder="201동" />
+          <Title>병실 호수를 입력해주세요.</Title>
+          <Input placeholder="201" />
+          <Title>중환자실인 경우 선택해주세요.</Title>
+          <ICUWrap>
+            <input type="checkbox" />
+            <span>icu*</span>
+          </ICUWrap>
+          <Title>입원 가능한 최대인원을 입력해주세요.</Title>
+          <Input placeholder="26" />
           <Button>등록</Button>
         </Wrap>
       </AddModal>
@@ -41,6 +50,7 @@ const Input = styled.input`
   border: 1px solid #a5a5a5;
   border-radius: 8px;
   padding: 12px;
+  margin-bottom: 40px;
 `;
 
 const Button = styled.button`
@@ -61,4 +71,21 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-export default DongAddModal;
+const ICUWrap = styled.div`
+  display: flex;
+  margin-bottom: 40px;
+  span {
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 120%;
+    color: #191919;
+    margin-left: 10px;
+  }
+  input {
+    width: 30px;
+  }
+`;
+
+export default SilAddModal;

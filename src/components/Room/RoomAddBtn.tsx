@@ -1,14 +1,19 @@
 import styled from "styled-components";
 const PlusIcon = process.env.PUBLIC_URL + "/img/Room_add.png";
 
-const RoomAddBtn = () => {
+type RoomAddBtnType = {
+  setDongOpen: (v: boolean) => void;
+  setSilOpen: (v: boolean) => void;
+};
+
+const RoomAddBtn: React.FC<RoomAddBtnType> = ({ setDongOpen, setSilOpen }) => {
   return (
     <Container>
-      <Button>
+      <Button onClick={() => setDongOpen(true)}>
         병동등록
         <img src={PlusIcon} alt="" />
       </Button>
-      <Button>
+      <Button onClick={() => setSilOpen(true)}>
         병실등록
         <img src={PlusIcon} alt="" />
       </Button>

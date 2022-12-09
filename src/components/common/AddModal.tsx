@@ -12,6 +12,7 @@ const AddModal: React.FC<ModalType> = ({ title, open, setOpen, children }) => {
   const close = () => {
     setOpen(false);
   };
+
   return (
     <Container>
       <Wrap>
@@ -40,7 +41,9 @@ const Container = styled.div`
 `;
 
 const Wrap = styled.div`
-  position: absolute;
+  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 440px;
   height: 686px;
   text-align: center;
@@ -83,9 +86,8 @@ const Line = styled.div`
 
 const Content = styled.div`
   display: flex;
-  justify-content: space-between;
-  background-color: aliceblue;
   margin: 26px;
+  height: 100%;
 `;
 
 export default AddModal;
