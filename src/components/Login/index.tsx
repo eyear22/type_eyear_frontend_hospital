@@ -26,7 +26,6 @@ const Login = () => {
       if (auth.action.type === "AUTH_SUCCESS") {
         setCookie("access_token", auth.data.tokens.access_token);
         setCookie("refresh_token", auth.data.tokens.refresh_token);
-        goHome();
       }
     }
   }, [auth]);

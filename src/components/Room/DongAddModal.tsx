@@ -31,7 +31,7 @@ const DongAddModal: React.FC<DongAddModalType> = ({ open, setOpen }) => {
           <Input
             value={wardName}
             onChange={(e) => setWardName(e.target.value)}
-            placeholder="201동"
+            placeholder="21병동"
           />
           <Button onClick={registerWard}>등록</Button>
         </Wrap>

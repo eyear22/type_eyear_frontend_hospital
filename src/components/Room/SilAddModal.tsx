@@ -1,4 +1,7 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { PostRoom } from "../../redux/room";
 import AddModal from "../common/AddModal";
 
 type SilAddModalType = {
@@ -7,22 +10,45 @@ type SilAddModalType = {
 };
 
 const SilAddModal: React.FC<SilAddModalType> = ({ open, setOpen }) => {
+  const [roomNum, setRoomNum] = useState("");
+  const [limit, setLimit] = useState("");
+  const [icu, setIcu] = useState(false);
+  const [wardName, setWardName] = useState("");
+  const dispatch = useDispatch<any>();
+
+  // 병동 등록
+  const registerRoom = () => {
+    dispatch(PostRoom(roomNum, limit, icu, wardName));
+  };
+
   return (
     <>
       <AddModal title="병실추가" open={open} setOpen={setOpen}>
         <Wrap>
           <Title>병동 이름을 입력해주세요.</Title>
-          <Input placeholder="201동" />
+          <Input
+            value={wardName}
+            onChange={(e) => setWardName(e.target.value)}
+            placeholder="21병동"
+          />
           <Title>병실 호수를 입력해주세요.</Title>
-          <Input placeholder="201" />
+          <Input
+            value={roomNum}
+            onChange={(e) => setRoomNum(e.target.value)}
+            placeholder="201"
+          />
           <Title>중환자실인 경우 선택해주세요.</Title>
           <ICUWrap>
-            <input type="checkbox" />
+            <input type="checkbox" onChange={(e) => setIcu(e.target.checked)} />
             <span>icu*</span>
           </ICUWrap>
           <Title>입원 가능한 최대인원을 입력해주세요.</Title>
-          <Input placeholder="26" />
-          <Button>등록</Button>
+          <Input
+            value={limit}
+            onChange={(e) => setLimit(e.target.value)}
+            placeholder="26"
+          />
+          <Button onClick={registerRoom}>등록</Button>
         </Wrap>
       </AddModal>
     </>

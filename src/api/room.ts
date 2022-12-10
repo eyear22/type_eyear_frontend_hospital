@@ -12,3 +12,23 @@ export const postWardAPI = (name: string) =>
       headers: { Authorization: `Bearer ${getCookie("access_token")}` },
     }
   );
+
+// 병실 등록
+export const postRoomAPI = (
+  roomNumber: string,
+  limit: string,
+  icuCheck: boolean,
+  ward: string
+) =>
+  api.post(
+    `${BASE_URL}/hospital/room`,
+    {
+      roomNumber: Number(roomNumber),
+      limitPatient: Number(limit),
+      icuCheck: icuCheck,
+      wardName: ward,
+    },
+    {
+      headers: { Authorization: `Bearer ${getCookie("access_token")}` },
+    }
+  );
