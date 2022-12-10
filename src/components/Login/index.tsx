@@ -1,28 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { LoginAPI } from "../../redux/auth";
 import { setCookie } from "../../util/cookie";
+const CloseImg = process.env.PUBLIC_URL + "/img/login_close.png";
 
 const Login = () => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
-  const auth = useSelector((state: any) => state.auth.data);
-  console.log(auth);
   const dispatch = useDispatch<any>();
+  const auth = useSelector((state: any) => state.auth);
 
   const LoginBtn = () => {
     dispatch(LoginAPI(id, password));
-
-    if (auth.message === "success") {
-      setCookie("access_token", auth.tokens.access_token);
-      setCookie("refresh_token", auth.tokens.refresh_token);
-      goHome();
-    }
   };
+
+  useEffect(() => {
+    if (auth.error) {
+      if (auth.action.type === "AUTH_ERROR") setError(true);
+    } else if (auth.data) {
+      if (auth.action.type === "AUTH_SUCCESS") {
+        setCookie("access_token", auth.data.tokens.access_token);
+        setCookie("refresh_token", auth.data.tokens.refresh_token);
+        goHome();
+      }
+    }
+  }, [auth]);
 
   const goHome = () => {
     navigate("/");
@@ -42,20 +49,24 @@ const Login = () => {
               value={id}
               onChange={(e) => setId(e.target.value)}
             />
-            {/* <div className="warning">
-              <img src={CloseImg} alt="" />
-              등록된 고유번호가 아닙니다.
-            </div> */}
+            {error && (
+              <div className="warning">
+                <img src={CloseImg} alt="" />
+                등록된 고유 번호가 아닙니다.
+              </div>
+            )}
             <input
               placeholder="병원 비밀번호를 입력해주세요."
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="password"
             />
-            {/* <div className="warning">
-              <img src={CloseImg} alt="" />
-              올바른 비밀번호가 아닙니다.
-            </div> */}
+            {error && (
+              <div className="warning">
+                <img src={CloseImg} alt="" />
+                올바른 비밀번호가 아닙니다.
+              </div>
+            )}
             <FindPwd>
               <h4>비밀번호 찾기</h4>
             </FindPwd>
