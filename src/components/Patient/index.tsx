@@ -1,7 +1,11 @@
+import { useState } from "react";
 import styled from "styled-components";
+import PatientAddBtn from "./PatientAddBtn";
+import PatientAddModal from "./PatientAddModal";
 import PatientList from "./PatientList";
 
 const Patient = () => {
+  const [open, setOpen] = useState(false);
   return (
     <>
       <Container>
@@ -9,6 +13,8 @@ const Patient = () => {
           <Title>환우 관리</Title>
           <Line />
           <PatientList />
+          <PatientAddBtn setOpen={setOpen} />
+          {open && <PatientAddModal open={open} setOpen={setOpen} />}
         </Wrap>
       </Container>
     </>

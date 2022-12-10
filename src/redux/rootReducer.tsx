@@ -3,6 +3,7 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import auth from "../redux/auth";
 import hospital from "../redux/hospital";
+import room from "../redux/room";
 
 const persistConfig = {
   key: "root",
@@ -10,6 +11,6 @@ const persistConfig = {
   whitelist: ["auth"],
 };
 
-const rootReducer = combineReducers({ auth, hospital });
+const rootReducer = combineReducers({ auth, hospital, room });
 
 export default persistReducer(persistConfig, rootReducer);

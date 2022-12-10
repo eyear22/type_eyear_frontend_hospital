@@ -1,4 +1,7 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { PostWard } from "../../redux/room";
 import AddModal from "../common/AddModal";
 
 type DongAddModalType = {
@@ -7,13 +10,30 @@ type DongAddModalType = {
 };
 
 const DongAddModal: React.FC<DongAddModalType> = ({ open, setOpen }) => {
+  const [wardName, setWardName] = useState("");
+  const dispatch = useDispatch<any>();
+  const { Room } = useSelector((state: any) => ({
+    Room: state.room,
+  }));
+
+  // 병동 등록
+  const registerWard = () => {
+    dispatch(PostWard(wardName));
+    if (Room.action.type === "POST_WARD_ERROR") alert("싪패");
+    console.log(wardName);
+  };
+
   return (
     <>
       <AddModal title="병동추가" open={open} setOpen={setOpen}>
         <Wrap>
           <Title>병동 이름을 입력해주세요.</Title>
-          <Input placeholder="201동" />
-          <Button>등록</Button>
+          <Input
+            value={wardName}
+            onChange={(e) => setWardName(e.target.value)}
+            placeholder="201동"
+          />
+          <Button onClick={registerWard}>등록</Button>
         </Wrap>
       </AddModal>
     </>

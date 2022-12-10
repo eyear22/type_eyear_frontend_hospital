@@ -17,6 +17,9 @@ const PatientList = () => {
           <div className="num">
             <div className="sort">환자번호</div>
           </div>
+          <div className="birth">
+            <div className="sort">생년월일</div>
+          </div>
           <div className="ho">
             <div className="sort">병실</div>
           </div>
@@ -29,6 +32,7 @@ const PatientList = () => {
             <div className="index">1</div>
             <div className="name">박세희</div>
             <div className="num">PA1234</div>
+            <div className="birth">580322</div>
             <div className="ho">21병동/201호</div>
             <div className="date">6/3/22</div>
           </Item>
@@ -36,6 +40,7 @@ const PatientList = () => {
             <div className="index">2</div>
             <div className="name">이필재</div>
             <div className="num">PA5678</div>
+            <div className="birth">520704</div>
             <div className="ho">21병동/202호</div>
             <div className="date">6/3/22</div>
           </Item>
@@ -115,6 +120,11 @@ const InputArea = styled.div`
     justify-content: center;
     width: 10%;
   }
+  .birth {
+    display: flex;
+    justify-content: center;
+    width: 10%;
+  }
   .date {
     display: flex;
     justify-content: center;
@@ -174,6 +184,18 @@ const Item = styled.div`
     font-size: 16px;
     line-height: 120%;
     color: #000000;
+  }
+  .birth {
+    display: flex;
+    justify-content: center;
+    width: 10%;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.154px;
+    color: #70768c;
   }
   .ho {
     display: flex;
