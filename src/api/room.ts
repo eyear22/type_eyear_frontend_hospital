@@ -3,6 +3,12 @@ import { getCookie } from "../util/cookie";
 
 const BASE_URL = "http://localhost:3334";
 
+// 병실 리스트
+export const getRoomAPI = () =>
+  api.get(`${BASE_URL}/hospital/roomList`, {
+    headers: { Authorization: `Bearer ${getCookie("access_token")}` },
+  });
+
 // 병동 등록
 export const postWardAPI = (name: string) =>
   api.post(

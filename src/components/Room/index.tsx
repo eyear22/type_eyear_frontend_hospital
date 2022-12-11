@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { GetRoom } from "../../redux/room";
 import DongAddModal from "./DongAddModal";
 import RoomAddBtn from "./RoomAddBtn";
 import RoomList from "./RoomList";
@@ -8,6 +10,11 @@ import SilAddModal from "./SilAddModal";
 const Room = () => {
   const [dongOpen, setDongOpen] = useState(false);
   const [silOpen, setSilOpen] = useState(false);
+  const dispatch = useDispatch<any>();
+
+  useEffect(() => {
+    dispatch(GetRoom());
+  }, []);
 
   return (
     <>
