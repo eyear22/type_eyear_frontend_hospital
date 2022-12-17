@@ -31,8 +31,8 @@ export const GetRoom = () => async (dispatch: any) => {
 export const PostWard = (name: string) => async (dispatch: any) => {
   dispatch({ type: POST_WARD });
   try {
-    const mailDetail = await roomAPI.postWardAPI(name);
-    dispatch({ type: POST_WARD_SUCCESS, room: mailDetail });
+    const ward = await roomAPI.postWardAPI(name);
+    dispatch({ type: POST_WARD_SUCCESS, room: ward });
   } catch (e) {
     dispatch({ type: POST_WARD_ERROR, error: e });
   }
@@ -44,13 +44,8 @@ export const PostRoom =
   async (dispatch: any) => {
     dispatch({ type: POST_ROOM });
     try {
-      const mailDetail = await roomAPI.postRoomAPI(
-        roomNumber,
-        limit,
-        icuCheck,
-        ward
-      );
-      dispatch({ type: POST_ROOM_SUCCESS, room: mailDetail });
+      const room = await roomAPI.postRoomAPI(roomNumber, limit, icuCheck, ward);
+      dispatch({ type: POST_ROOM_SUCCESS, room: room });
     } catch (e) {
       dispatch({ type: POST_ROOM_ERROR, error: e });
     }

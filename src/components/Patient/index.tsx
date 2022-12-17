@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { GetPatient } from "../../redux/patient";
 import PatientAddBtn from "./PatientAddBtn";
 import PatientAddModal from "./PatientAddModal";
 import PatientList from "./PatientList";
 
 const Patient = () => {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch<any>();
+
+  useEffect(() => {
+    dispatch(GetPatient());
+  }, []);
+
   return (
     <>
       <Container>

@@ -1,4 +1,7 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { PostPatient } from "../../redux/patient";
 import AddModal from "../common/AddModal";
 
 type PatientAddModalType = {
@@ -7,27 +10,71 @@ type PatientAddModalType = {
 };
 
 const PatientAddModal: React.FC<PatientAddModalType> = ({ open, setOpen }) => {
+  const [name, setName] = useState("");
+  const [patNumber, setPatNumber] = useState("");
+  const [birth, setBirth] = useState("");
+  const [inDate, setInDate] = useState("");
+  const [infoNumber, setInfoNumber] = useState("");
+  const [wardName, setWardName] = useState("");
+  const [roomNum, setRoomNum] = useState("");
+  const dispatch = useDispatch<any>();
+
+  // 환자 등록
+  const registerPatient = () => {
+    dispatch(
+      PostPatient(name, patNumber, birth, inDate, infoNumber, wardName, roomNum)
+    );
+  };
+
   return (
     <>
       <AddModal title="환자추가" open={open} setOpen={setOpen}>
         <Wrap>
           <Scroll>
             <Title>환자 이름을 입력해주세요.</Title>
-            <Input placeholder="박노인" />
+            <Input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="박노인"
+            />
             <Title>환자 번호를 입력해주세요.</Title>
-            <Input placeholder="PA1231" />
+            <Input
+              value={patNumber}
+              onChange={(e) => setPatNumber(e.target.value)}
+              placeholder="PA1231"
+            />
             <Title>환자의 생년월일을 입력해주세요.</Title>
-            <Input placeholder="1959-10-10" />
+            <Input
+              value={birth}
+              onChange={(e) => setBirth(e.target.value)}
+              placeholder="1959-10-10"
+            />
             <Title>환자의 입원날짜를 입력해주세요.</Title>
-            <Input placeholder="2013-03-10" />
+            <Input
+              value={inDate}
+              onChange={(e) => setInDate(e.target.value)}
+              placeholder="2013-03-10"
+            />
             <Title>환자의 주민번호를 입력해주세요.</Title>
-            <Input placeholder="000000-0000000" />
+            <Input
+              value={infoNumber}
+              onChange={(e) => setInfoNumber(e.target.value)}
+              placeholder="000000-0000000"
+            />
             <Title>환자의 병동을 입력해주세요.</Title>
-            <Input placeholder="201동" />
+            <Input
+              value={wardName}
+              onChange={(e) => setWardName(e.target.value)}
+              placeholder="201동"
+            />
             <Title>환자의 병실을 입력해주세요.</Title>
-            <Input placeholder="100" />
+            <Input
+              value={roomNum}
+              onChange={(e) => setRoomNum(e.target.value)}
+              placeholder="100"
+            />
           </Scroll>
-          <Button>등록</Button>
+          <Button onClick={registerPatient}>등록</Button>
         </Wrap>
       </AddModal>
     </>

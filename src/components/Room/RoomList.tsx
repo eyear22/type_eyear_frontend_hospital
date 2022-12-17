@@ -1,12 +1,14 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 const SearchIcon = process.env.PUBLIC_URL + "/img/Search.png";
 
 const RoomList = () => {
+  const rooms = useSelector((state: any) => state.room.data);
   return (
     <>
       <Container>
         <Title>
-          등록된 병실<span>2</span>
+          등록된 병실<span>{rooms && rooms.rooms.length}</span>
         </Title>
         <Line />
         <InputArea>
@@ -22,22 +24,18 @@ const RoomList = () => {
           </div>
         </InputArea>
         <Content>
-          <Item>
-            <div className="dong">21병동</div>
-            <div className="ho">
-              201호 <span>icu*</span>
-            </div>
-            <div className="num">26</div>
-            <div className="date">6/3/22</div>
-          </Item>
-          <Item>
-            <div className="dong">21병동</div>
-            <div className="ho">
-              202호 <span>icu*</span>
-            </div>
-            <div className="num">26</div>
-            <div className="date">6/3/22</div>
-          </Item>
+          {rooms &&
+            rooms.rooms.map((item: any, index: number) => (
+              <Item key={index}>
+                <div className="dong">{item.ward_name}</div>
+                <div className="ho">
+                  {item.room_number + "호"}
+                  <span>{item.room_icuCheck ? "icu*" : ""}</span>
+                </div>
+                <div className="num">{item.room_currentPatient}</div>
+                <div className="date">{item.room_createdAt}</div>
+              </Item>
+            ))}
         </Content>
       </Container>
     </>

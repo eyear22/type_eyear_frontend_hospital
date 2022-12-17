@@ -1,12 +1,14 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 const SearchIcon = process.env.PUBLIC_URL + "/img/Search.png";
 
 const PatientList = () => {
+  const patients = useSelector((state: any) => state.patient.data);
   return (
     <>
       <Container>
         <Title>
-          등록된 환자<span>2</span>
+          등록된 환자<span>{patients && patients.patients.length}</span>
         </Title>
         <Line />
         <InputArea>
@@ -28,22 +30,19 @@ const PatientList = () => {
           </div>
         </InputArea>
         <Content>
-          <Item>
-            <div className="index">1</div>
-            <div className="name">박세희</div>
-            <div className="num">PA1234</div>
-            <div className="birth">580322</div>
-            <div className="ho">21병동/201호</div>
-            <div className="date">6/3/22</div>
-          </Item>
-          <Item>
-            <div className="index">2</div>
-            <div className="name">이필재</div>
-            <div className="num">PA5678</div>
-            <div className="birth">520704</div>
-            <div className="ho">21병동/202호</div>
-            <div className="date">6/3/22</div>
-          </Item>
+          {patients &&
+            patients.patients.map((item: any, index: number) => (
+              <Item key={item.patient_id}>
+                <div className="index">{item.patient_id}</div>
+                <div className="name">{item.patient_name}</div>
+                <div className="num">{item.patient_patNumber}</div>
+                <div className="birth">{item.patient_birth}</div>
+                <div className="ho">
+                  {item.ward_name + "/" + item.room_roomNumber + "호"}
+                </div>
+                <div className="date">{item.patient_inDate}</div>
+              </Item>
+            ))}
         </Content>
       </Container>
     </>
