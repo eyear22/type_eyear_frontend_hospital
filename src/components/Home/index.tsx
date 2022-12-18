@@ -18,8 +18,9 @@ const Home = () => {
   useEffect(() => {
     dispatch(GetTodayMail());
   }, []);
+
   const mailList = useSelector((state: any) => state.hospital.data);
-  console.log(mailList);
+
   return (
     <>
       <Container>

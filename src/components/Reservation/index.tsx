@@ -1,12 +1,23 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { GetReservation } from "../../redux/reservation";
+import ReservationList from "./ReservationList";
 
 const Reservation = () => {
+  const dispatch = useDispatch<any>();
+
+  useEffect(() => {
+    dispatch(GetReservation());
+  }, []);
+
   return (
     <>
       <Container>
         <Wrap>
           <Title>예약 관리</Title>
           <Line />
+          <ReservationList />
         </Wrap>
       </Container>
     </>
